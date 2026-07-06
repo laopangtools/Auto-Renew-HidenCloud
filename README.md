@@ -1,4 +1,4 @@
-# HidenCloud 自动续期
+## HidenCloud自动续期 
 
 ## 配置
 
@@ -8,25 +8,13 @@
 |---|---|---|---|
 | `COOKIE_VALUE`  | ✅必填 | Remenber_web cookie | Remenber_web cookie的值 |
 | `EMAIL`         | ✅必填 | HidenCloud 邮箱 | xxx@gmail.com |
-| `PASSWORD`      | ✅必填 | HidenCloud 密码 | xxxxx |
-| `NODE_LINK`     | ❌可选 | 代理节点地址，支持多种协议 | vless:// vmess:// trojan:// |
-| `TG_BOT_TOKEN`  | ❌可选 | Telegram Bot Token | `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11` |
+| `PASSWORD`      | ✅必填 | HidenCloud 密码 | xxxxxxxx      |
+| `NODE_LINK`     | ❌可选 | 代理节点地址，支持多种协议 | vless:// vmess:// trojan:// hysteria2:// anytls:// tuic:// sokcs5:// |
+| `TG_BOT_TOKEN`  | ❌可选 | Telegram Bot Token | `123456:ABC-DEF12l-zyx57W2v1u` |
 | `TG_CHAT_ID`    | ❌可选 | Telegram Chat ID | `123456789` |
 
 
-
-### ⚙️ REPO_TOKEN 权限要求
-
-
-### HIDENCLOUD 格式
-
-邮箱和密码用 `-----` 分隔（目前仅支持单账号）：
-
-```
-myaccount@mail.com-----MyStr0ngP@ssw0rd
-```
-
-### 代理格式（最好本地浏览器试试能不能登陆再用）`最好用注册号的代理`
+### 代理格式（确认在v2rayN里使用正常的节点）`最好用注册号的代理`
 
 `NODE_LINK` 支持以下任意一种代理协议的完整分享链接（不配置则直连）：
 
@@ -38,21 +26,13 @@ myaccount@mail.com-----MyStr0ngP@ssw0rd
 
 ## 使用
 
-### GitHub Actions（推荐）
+### GitHub Actions 运行步骤
 
 1. Fork 本仓库  
-2. 在仓库 Secrets 中配置 `HIDENCLOUD` 和 `REPO_TOKEN`（注意 PAT 权限）  
-3. （可选）配置 `TG_BOT_TOKEN`、`TG_CHAT_ID`、`PROXY_NODE`  
-4. 工作流会按初始 Cron 计划运行，首次成功后会自动计算并更新为最优的后续执行时间  
-5. 你也可以随时在 Actions 页面手动触发 `workflow_dispatch`  
+2. 在仓库 Secrets 中配置必填的环境变量,（可选）配置 `TG_BOT_TOKEN`、`TG_CHAT_ID`、`NODE_LINK`  
+3. Actions菜单里手动触发 `workflow_dispatch`  
+4. 根据服务到期时间来修改cron运行时间,比如你的服务是25号到期,计算后是星期二,则设置cron为每周一运行
 
-## 注意事项
-
-- Cloudflare Turnstile 验证有一定失败概率，脚本已内置等待与重试机制  
-- 工作流会自动修改 `.github/workflows/HidenCloud_Renew.yml` 中的 Cron 表达式，请确保 Actions 有写入权限  
-- 浏览器状态缓存在 GitHub Actions Cache 中，可加速后续运行，每次执行后会自动清理旧缓存  
-- 日志和 Telegram 通知中的敏感信息（邮箱、服务器 ID 等）均已脱敏处理  
-- 代理为可选项，若在国内环境运行，建议配置代理以提高稳定性  
 
 ---
 
